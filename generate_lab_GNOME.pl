@@ -2,7 +2,7 @@
 
 # Author: Luca Menichetti
 #
-# Da un file semplice chiamato "pc.list"
+# Da un file semplice chiamato "pcs.list"
 # genera tutto il necessario alla creazione di un lab
 # per netkit.
 
