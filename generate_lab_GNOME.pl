@@ -88,7 +88,7 @@ sub calc_netmask {
     return ($prefix,$netmask);
 }
 
-# Controllo se esiste il file "pc.list"
+# Controllo se esiste il file "pcs.list"
 unless (-e "pcs.list") {
     print "ERRORE: il file pcs.list non esiste!\n";
     exit 1;
