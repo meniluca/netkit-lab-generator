@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Author: Luca Menichetti
+# Author: Luca Menichetti , Raffaele Vacchiano
 #
 # Da un file semplice chiamato "pcs.list"
 # genera tutto il necessario alla creazione di un lab
@@ -14,6 +14,27 @@ use Switch;
 
 # Metodo "uniq" che da una lista di elementi
 # ritorna la lista degli elementi senza doppioni
+
+# initial checks
+
+my $guimaker="";
+my @requireds = ("kdialog","zenity");
+
+my $req;
+foreach $req (@requireds)
+{
+  if (-f "/usr/bin/$req"){
+    $guimaker=$req;
+  }
+}
+
+if ($guimaker eq ""){
+  print "Per far girare questo script ti serve uno di questi programmi: zenity, kdialog!!!\n";
+  exit;
+}
+
+# end checks
+
 sub uniq {
 
     my @list = @_;
@@ -309,7 +330,11 @@ foreach $line (@lines)
     
     # Un messaggio con finestra di dialogo che chiede di confermare eventualmente dopo aver manipolato
     # la stringa $ifconfig_string
-    my $string_startup = `zenity --entry --text="$name" --entry-text="$ifconfig_string" --width=600`;
+    my $string_startup ="";
+    switch ($guimaker) {
+        case "zenity"    { $string_startup = `zenity --entry --text="$name" --entry-text="$ifconfig_string" --width=600;` }
+        case "kdialog"   { $string_startup = `kdialog --inputbox "$name" "$ifconfig_string"`; }
+    }
     
     # Scrivo la stringa nel file
     `echo -n "$string_startup" >> $name.startup`;

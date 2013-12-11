@@ -1,0 +1,11 @@
+# A 10.0.0.0/24
+
+pc1 .1 eth0, nameserver webserver
+pc2 .2 eth0, zebra rip
+pc3 .3 eth0
+pc4 .4
+
+# B 20.0.0.0 255.255.255.0
+pc1 .1 eth1
+pc2 .2 eth1
+pc5 .5
